@@ -2,13 +2,18 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using UnityEngine.Events;
 
 public class GameManager : MonoBehaviour
 {
     public static GameManager instance;
 
+    [SerializeField] private UnityEvent _trigger;
+
     public int currentScore;
-    public int scorePerNote = 100;
+    public int scorePerNote = 10;
+    public int scorePerGoodNote = 12;
+    public int scorePerPerfectNote = 15;
 
     public int currentMultiplier;
     public int multiplierTracker;
@@ -35,7 +40,7 @@ public class GameManager : MonoBehaviour
 
     public void NoteHit()
     {
-        Debug.Log("Hit");
+        _trigger.Invoke();
 
         if(currentMultiplier - 1 < multiplierThreshold.Length){
             multiplierTracker++;
@@ -51,10 +56,26 @@ public class GameManager : MonoBehaviour
         scoreText.text  = "Score: " + currentScore;
     }
 
+    public void NormalHit()
+    {
+        currentScore += scorePerNote * currentMultiplier;
+        NoteHit();
+    }
+
+    public void GoodHit()
+    {
+        currentScore += scorePerGoodNote * currentMultiplier;
+        NoteHit();
+    }
+
+    public void PerfectHit()
+    {
+        currentScore += scorePerPerfectNote * currentMultiplier;
+        NoteHit();
+    }
+
     public void NoteMissed()
     {
-        Debug.Log("Missed");
-
         currentMultiplier = 1;
         multiplierTracker = 0;
 
