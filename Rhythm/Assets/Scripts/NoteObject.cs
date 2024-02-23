@@ -4,44 +4,28 @@ using UnityEngine;
 
 public class NoteObject : MonoBehaviour
 {
-    public bool canBePressed;
-
-    public KeyCode keyToPress;
-
-    private bool hitNote = false;
-    // Start is called before the first frame update
+    double timeInstantiated;
+    public float assignedTime;
     void Start()
     {
-        
+        timeInstantiated = assignedTime - SongManager.Instance.noteTime;
     }
 
     // Update is called once per frame
     void Update()
     {
-        if(Input.GetKeyDown(keyToPress)){
-            if(canBePressed){
-                hitNote = true;
-                gameObject.SetActive(false);
+        double timeSinceInstantiated = SongManager.GetAudioSourceTime() - timeInstantiated;
+        float t = (float)(timeSinceInstantiated / (SongManager.Instance.noteTime * 2));
 
-                GameManager.instance.NoteHit();
-            }
+
+        if (t > 1)
+        {
+            Destroy(gameObject);
         }
-    }
-
-    private void OnTriggerEnter2D(Collider2D other) {
-        if(other.tag == "Activator"){
-            canBePressed = true;
-        }
-    }
-
-    private void OnTriggerExit2D(Collider2D other) {
-        if(other.tag == "Activator"){
-            canBePressed = false;
-            
-            if(!hitNote){
-                GameManager.instance.NoteMissed();
-            }
-            
+        else
+        {
+            transform.localPosition = Vector3.Lerp(Vector3.up * SongManager.Instance.noteSpawnY, Vector3.up * SongManager.Instance.noteDespawnY, t); 
+            GetComponent<SpriteRenderer>().enabled = true;
         }
     }
 }
