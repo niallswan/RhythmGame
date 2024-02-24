@@ -64,24 +64,20 @@ public class Lane : MonoBehaviour
                 {
                     Hit("perfect");
                     print($"Perfect hit on {inputIndex} note");
-                    Instantiate(perfectEffect, transform.position, perfectEffect.transform.rotation);
                     Destroy(notes[inputIndex].gameObject);
                     inputIndex++;
                 }else if(Math.Abs(audioTime - timeStamp) < marginOfErrorGood){
                     Hit("good");
                     print($"Good hit on {inputIndex} note");
-                    Instantiate(goodEffect, transform.position, goodEffect.transform.rotation);
                     Destroy(notes[inputIndex].gameObject);
                     inputIndex++;
                 }else if(Math.Abs(audioTime - timeStamp) < marginOfError){
                     Hit(null);
                     print($"Hit on {inputIndex} note");
-                    Instantiate(hitEffect, transform.position, hitEffect.transform.rotation);
                     Destroy(notes[inputIndex].gameObject);
                     inputIndex++;
                 }else{
                     print($"Hit inaccurate on {inputIndex} note with {Math.Abs(audioTime - timeStamp)} delay");
-                    Instantiate(missEffect, transform.position, missEffect.transform.rotation);
                 }
             }
             if (timeStamp + marginOfError <= audioTime)
@@ -96,16 +92,20 @@ public class Lane : MonoBehaviour
     private void Hit(string hit)
     {
         if(hit == "perfect"){
+            Instantiate(perfectEffect, transform.position, perfectEffect.transform.rotation);
             GameManager.instance.PerfectHit();
         }else if(hit == "good"){
+            Instantiate(goodEffect, transform.position, goodEffect.transform.rotation);
             GameManager.instance.GoodHit();
         }else{
+            Instantiate(hitEffect, transform.position, hitEffect.transform.rotation);
             GameManager.instance.NormalHit();
         }
         
     }
     private void Miss()
     {
+        Instantiate(missEffect, transform.position, missEffect.transform.rotation);
         GameManager.instance.NoteMissed();
     }
 }
