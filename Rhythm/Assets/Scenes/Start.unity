@@ -907,7 +907,7 @@ AudioSource:
   m_Enabled: 1
   serializedVersion: 4
   OutputAudioMixerGroup: {fileID: 0}
-  m_audioClip: {fileID: 8300000, guid: f47d746074776fb4b962e2b2eade97ec, type: 3}
+  m_audioClip: {fileID: 8300000, guid: 1ae69d5e6185f004896173d86b99644d, type: 3}
   m_PlayOnAwake: 0
   m_Volume: 1
   m_Pitch: 1
@@ -1786,7 +1786,7 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
   m_SortingLayer: 0
-  m_SortingOrder: 0
+  m_SortingOrder: 2
   m_Sprite: {fileID: 21300000, guid: fd694de3f6c3bb34b8a06a1188781367, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
@@ -3501,8 +3501,8 @@ MonoBehaviour:
   marginOfErrorGood: 0.1
   marginOfErrorPerfect: 0.05
   inputDelayInMilliseconds: 0
-  fileLocation: lurkingFull.mid
-  noteTime: 1.5
+  fileLocation: beaterFull.mid
+  noteTime: 1
   noteSpawnY: 10
   noteTapY: 0.5
 --- !u!4 &2083457681
